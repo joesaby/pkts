@@ -695,6 +695,10 @@ public abstract class SipMessageBuilder<T extends SipMessage> implements SipMess
             contentLengthHeader = ContentLengthHeader.create(body == null ? 0 : body.capacity());
         }
 
+        if (isBuildingResponse()){
+            contentLengthHeader = ContentLengthHeader.create(body == null ? 0 : body.capacity());
+        }
+
         if (contentLengthHeader != null) {
             msgSize += contentLengthHeader.getBufferSize() + 2;
             finalHeaders.add(contentLengthHeader);
